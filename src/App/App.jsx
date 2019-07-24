@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, } from 'react-router-dom';
-import Header from '../components/Header';
-import Signin from '../components/Signin';
-import Signup from '../components/Signup';
-import Userprofile from '../components/Userprofile';
-import Addbeneficiary from '../components/Addbeneficiary';
-import Useraccount from '../components/Useraccount';
-import Viewbeneficiary from '../components/Viewbeneficiary';
-import Contactus from '../components/Contactus';
-import Home from '../components/Home';
+import Header from '../common/components/Header';
+import Signin from '../Signin';
+import Signup from '../Signup';
+import Userprofile from '../Userprofile';
+import Addbeneficiary from '../Addbeneficiary';
+import Useraccount from '../Useraccount';
+import BeneficiaryDetails from '../BeneficiaryDetails';
+import Contactus from '../Contactus';
+import Home from '../Home';
 
 const App = () => (
   <div>
@@ -21,7 +21,7 @@ const App = () => (
         <Route path="/userprofile/" component={Userprofile} />
         <Route path="/userprofile/useraccount" component={Useraccount} />
         <Route path="/userprofile/Addbeneficiary" component={Addbeneficiary} />
-        <Route path="/userprofile/Viewbeneficiary" component={Viewbeneficiary} />
+        <Route path="/userprofile/Viewbeneficiary" component={BeneficiaryDetails} />
         <Route path="/userprofile/contactus" component={Contactus} />
       </div>
     </Router>

@@ -1,87 +1,43 @@
+
+
 import React from "react";
 //import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import "bootstrap/dist/css/bootstrap.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenAlt} from '@fortawesome/free-solid-svg-icons'
+import EmailValidation from '../common/validator/EmailValidation'
+import PasswordValidation from '../common/validator/PasswordValidation'
+import NameValidation from '../common/validator/NameValidation'
+import ContactNumberValidation from '../common/validator/ContactNumberValidation'
 
 class Signup extends React.Component {
 
   render() {
-      const nameTest=/^[a-zA-Z ]{2,30}$/i;
-  
-    const emailTest = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-    const contactnumberTest=/^[0-9]{10}$/i;
-    const passwordTest=/(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/i;
+      
     return (
       <div className="container-fluid">
           <div className="header">
              Registration &nbsp; <FontAwesomeIcon icon={faPenAlt} />
           </div>
         <div className="row">
-          <div className="create-customer">
+          <div >
             <Formik
               initialValues={{name:'',email:'',contactnumber:'',password:''}}
               validate={values => {
                 let errors = {};
-                
-                if (values.name === "") {
-                    errors.name = "Name is required";
-                  } else if (!nameTest.test(values.name)) {
-                    errors.name = "Invalid Name format";
-                  }
+                errors.email = EmailValidation(values)
+                errors.password= PasswordValidation(values);
+                errors.contactnumber = ContactNumberValidation(values)
+                errors.name= NameValidation(values);
 
-                 
-                
-                if (values.email === "") {
-                  errors.email = "Email is required";
-                } else if (!emailTest.test(values.email)) {
-                  errors.email = "Invalid email address format";
-                }
-
-
-                if (values.password === "") {
-                  errors.password = "Password is required";
-                } else if ( !passwordTest.test(values.password)) {
-                    if(values.password.length<6)
-                    {
-                      errors.password= 'password length should be more than 6';
-                    }
-                    else{
-                      errors.password='please use special charactes and digits ';
-                    }
-                   
-                }
-              
-                if (values.contactnumber === "") {
-                    errors.contactnumber = "Contact number is required";
-                  } else if (!contactnumberTest.test(values.contactnumber)) {
-                    errors.contactnumber = "Invalid Contact number format";
-                  }
-
-                 
 
                 return errors;
               }}
             
               onSubmit={(values,{ setSubmitting }) => {
                 
-                console.log(values.addressline);
-                console.log(values);
-                 const userdata={
-                       name:'',
-                       emai:'',
-                       password:'',
-                       mobileno:'',
-                       
-                 };
-                 userdata.firstname=values.name;
-                 userdata.email=values.email;
-                 userdata.password=values.password;
-                 userdata.mobileno=values.contactnumber;
-                
-                
-      console.log(userdata);      
+                     
                 
      /* axios.post("http://10.51.200.85:9000/remittance/v1/CustomerService/",userdata)
       .then(res => {
@@ -90,7 +46,8 @@ class Signup extends React.Component {
         alert("Successfully Submitted");
         window.location.reload();
       }) */
-             setSubmitting(false);
+       
+      setSubmitting(false);
               }}
               
             >

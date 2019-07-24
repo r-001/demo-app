@@ -14,6 +14,8 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHome, faUserPlus,faUser,faEye, faIdCard} from '@fortawesome/free-solid-svg-icons'
 import {Link} from 'react-router-dom'
 
 const drawerWidth = 240;
@@ -142,11 +144,11 @@ export default function PersistentDrawerLeft() {
         </div>
         <Divider />
         <List>
-          {[<Link to='/' style={{paddingLeft: 13,color:"#0000FF",fontWeight : "550", textDecoration: 'none'}}>Home</Link>,
-           <Link to='/userprofile/useraccount' style={{paddingLeft: 13,color:"#0000FF",fontWeight : "550", textDecoration: 'none'}} onClick={handleDrawerClose}>User Account</Link>,
-            <Link to='/userprofile/Addbeneficiary' style={{paddingLeft: 13,color:"#0000FF",fontWeight : "550", textDecoration: 'none'}} onClick={handleDrawerClose}>Add beneficiary</Link>,
-             <Link to='/userprofile/Viewbeneficiary'  style={{paddingLeft: 13,color:"#0000FF", fontWeight : "550",textDecoration: 'none'}} onClick={handleDrawerClose}>View beneficiary</Link>,
-             <Link to='/userprofile/contactus' style={{paddingLeft: 13, color:"#0000FF",fontWeight : "550",textDecoration: 'none'}} onClick={handleDrawerClose}>Contact Us </Link>].map((text, index) => (
+          {[<Link to='/' style={{paddingLeft: 13,color:"#0000FF",fontWeight : "550", textDecoration: 'none'}}> &nbsp; <FontAwesomeIcon icon={faHome} /> Home</Link>,
+           <Link to='/userprofile/useraccount' style={{paddingLeft: 13,color:"#0000FF",fontWeight : "550", textDecoration: 'none'}} onClick={handleDrawerClose}>&nbsp;<FontAwesomeIcon icon={faUser} />&nbsp;User Account</Link>,
+            <Link to='/userprofile/Addbeneficiary' style={{paddingLeft: 13,color:"#0000FF",fontWeight : "550", textDecoration: 'none'}} onClick={handleDrawerClose}>&nbsp;<FontAwesomeIcon icon={faUserPlus} />&nbsp;Add beneficiary</Link>,
+             <Link to='/userprofile/Viewbeneficiary'  style={{paddingLeft: 13,color:"#0000FF", fontWeight : "550",textDecoration: 'none'}} onClick={handleDrawerClose}>&nbsp;<FontAwesomeIcon icon={faEye} />&nbsp;View beneficiary</Link>,
+             <Link to='/userprofile/contactus' style={{paddingLeft: 13, color:"#0000FF",fontWeight : "550",textDecoration: 'none'}} onClick={handleDrawerClose}>&nbsp;<FontAwesomeIcon icon={faIdCard} />&nbsp;Contact Us </Link>].map((text, index) => (
             <ListItem button key={text}>
               {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
               <ListItemText primary={text} />

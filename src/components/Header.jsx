@@ -6,8 +6,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 
-
-
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -37,7 +35,6 @@ export default function ButtonAppBar() {
           <Button component={AdapterLink2} to="/" />
           <Button component={AdapterLink} to="/login/" />
           <Button component={AdapterLink1} to="/signup/" />
-          
         </Toolbar>
       </AppBar>
     </div>

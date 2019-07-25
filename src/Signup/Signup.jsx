@@ -1,148 +1,64 @@
+import React, { Component } from "react";
+import { Formik } from "formik";
+import withStyles from "@material-ui/core/styles/withStyles";
+import { Form } from "./Form";
+import Paper from "@material-ui/core/Paper";
+import * as Yup from "yup";
+/* import Footer from '../common/components/Footer' */
 
+const styles = theme => ({
+   
+});
+const NameTest=/^[a-zA-Z ]{2,30}$/;
+const EmailTest=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/; 
+ 
+const validationSchema = Yup.object({
+ /*  name: Yup.string("Enter a name").required("Name is required") */
+ 
+ name: Yup.string().matches(NameTest,"Number and special charecter are not allowed")
+ .required("Please Enter the  Name"),
+  email: Yup.string().matches(EmailTest,"Please Enter valid Email (ex:xyz123@gmail.com)")
+    .required("Email is required"),
+  password: Yup.string("")
+    .min(8, "Password must contain atleast 8 characters")
+    .required("Enter your password"),
+  confirmPassword: Yup.string("Enter your password")
+    .required("Confirm your password")
+    .oneOf([Yup.ref("password")], "Password does not match")
+});
 
-import React from "react";
-//import axios from 'axios';
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import "bootstrap/dist/css/bootstrap.css";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPenAlt} from '@fortawesome/free-solid-svg-icons'
-import EmailValidation from '../common/validator/EmailValidation'
-import PasswordValidation from '../common/validator/PasswordValidation'
-import NameValidation from '../common/validator/NameValidation'
-import ContactNumberValidation from '../common/validator/ContactNumberValidation'
+class InputForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-class Signup extends React.Component {
+  submit = (data,{ setSubmitting }) => {
+    setTimeout(() => {
+      alert(JSON.stringify(data, null, 2));
+      setSubmitting(false);
+    }, 1000);
+  };
 
   render() {
-      
+    const values = { name: "", email: "", confirmPassword: "", password: "" };
     return (
-      <div className="container-fluid">
-          <div className="header">
-             Registration &nbsp; <FontAwesomeIcon icon={faPenAlt} />
-          </div>
-        <div className="row">
-          <div >
+      <React.Fragment>
+        <div >
+          <Paper  elevation={0} >
+            
             <Formik
-              initialValues={{name:'',email:'',contactnumber:'',password:''}}
-              validate={values => {
-                let errors = {};
-                errors.email = EmailValidation(values)
-                errors.password= PasswordValidation(values);
-                errors.contactnumber = ContactNumberValidation(values)
-                errors.name= NameValidation(values);
-
-
-                return errors;
-              }}
-            
-              onSubmit={(values,{ setSubmitting }) => {
-                
-                     
-                
-     /* axios.post("http://10.51.200.85:9000/remittance/v1/CustomerService/",userdata)
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-        alert("Successfully Submitted");
-        window.location.reload();
-      }) */
-       
-      setSubmitting(false);
-              }}
-              
-            >
-              {({ touched, errors, isSubmitting }) => (
-                <Form autocomplete="off">
-                    <div className="form-group">
-                      
-                      
-                      <Field
-                      autocomplete="off"
-                        type="name"
-                        name="name"
-                        placeholder="Enter Name"
-                        className={`form-control ${
-                          touched.name && errors.name ? "is-invalid" : ""
-                        }`}
-                      />
-                      <ErrorMessage
-                        component="div"
-                        name="name"
-                        className="invalid-feedback"
-                      />
-                    </div>
-                    <div className="form-group">
-                      
-                      
-                      <Field
-                      autocomplete="off"
-                        type="email"
-                        name="email"
-                        placeholder="Enter email"
-                        className={`form-control ${
-                          touched.email && errors.email ? "is-invalid" : ""
-                        }`}
-                      />
-                      <ErrorMessage
-                        component="div"
-                        name="email"
-                        className="invalid-feedback"
-                      />
-                    </div>
-                    
-            
-                  
-                  
-                  <div className="form-group">
-                   
-                    <Field
-                    autocomplete="off"
-                      type="contactnumber"
-                      name="contactnumber"
-                      placeholder="Enter contact number"
-                      className={`form-control ${
-                        touched.contactnumber && errors.contactnumber ? "is-invalid" : ""
-                      }`}
-                    />
-                    <ErrorMessage
-                      component="div"
-                      name="contactnumber"
-                      className="invalid-feedback"
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    
-                    <Field
-                    autocomplete="off"
-                      type="password"
-                      name="password"
-                      placeholder="Enter contact Number"
-                      className={`form-control ${
-                        touched.password && errors.password ? "is-invalid" : ""
-                      }`}
-                    />
-                    <ErrorMessage
-                      component="div"
-                      name="password"
-                      className="invalid-feedback"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="btn btn-primary btn-block"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? "Please wait..." : "Submit"}
-                  </button>
-                </Form>
-              )}
-            </Formik>
-          </div>
+              render={props => <Form {...props} />}
+              initialValues={values}
+              validationSchema={validationSchema}
+              onSubmit={this.submit}
+            />
+          </Paper>
         </div>
-      </div>
+        {/* <Footer/> */}
+      </React.Fragment>
     );
   }
 }
 
-export default Signup;
+export default withStyles(styles)(InputForm);

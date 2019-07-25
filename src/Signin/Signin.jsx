@@ -1,103 +1,54 @@
-import React from "react";
-//import axios from 'axios';
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import "bootstrap/dist/css/bootstrap.css";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPenAlt} from '@fortawesome/free-solid-svg-icons'
-import EmailValidation from '../common/validator/EmailValidation'
-import PasswordValidation from '../common/validator/PasswordValidation'
+import React, { Component } from "react";
+import { Formik } from "formik";
+import withStyles from "@material-ui/core/styles/withStyles";
+import { Form } from "./Form";
+import Paper from "@material-ui/core/Paper";
+import * as Yup from "yup";
 
+const styles = theme => ({
+   
+});
+const EmailTest=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/; 
 
+const validationSchema = Yup.object({
+  
+  email: Yup.string().matches(EmailTest,"Please Enter valid Email (ex:xyz123@gmail.com)")
+    .required("Email is required"),
+  password: Yup.string("")
+    .min(8, "Password must contain atleast 8 characters")
+    .required("Enter your password"),
+  
+});
 
-class Signin extends React.Component {
+class InputForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  submit = data => {
+    console.log(data);
+  };
 
   render() {
+    const classes = this.props;
+    const values = {  email: "",  password: "" };
     return (
-      <div className="container-fluid">
-          <div className="header">
-             Login &nbsp; <FontAwesomeIcon icon={faPenAlt} />
-          </div>
-        <div className="row">
-          <div >
+      <React.Fragment>
+        <div >
+          <Paper elevation={0} className={classes.paper}>
+            
             <Formik
-              initialValues={{email:'',password:''}}
-              validate={values => {
-                let errors = {};
-               
-
-                errors.email = EmailValidation(values)
-                errors.password= PasswordValidation(values);
-
-
-                return errors;
-              }}
-            
-              onSubmit={(values,{ setSubmitting }) => {
-                
-                
-           /* axios.post("URL",userdata)
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-        alert("Successfully Submitted");
-        window.location.reload();
-      }) */
-             setSubmitting(false);
-              }}
-              
-            >
-              {({ touched, errors, isSubmitting }) => (
-                <Form autocomplete="off">
-                    <div className="form-group">
-                     <Field
-                      autocomplete="off"
-                        type="email"
-                        name="email"
-                        placeholder="Enter email"
-                        className={`form-control ${
-                          touched.email && errors.email ? "is-invalid" : ""
-                        }`}
-                      />
-                      <ErrorMessage
-                        component="div"
-                        name="email"
-                        className="invalid-feedback"
-                      />
-                    </div>
-                    
-            
-                   <div className="form-group">
-                    
-                    <Field
-                    autocomplete="off"
-                      type="password"
-                      name="password"
-                      placeholder="Enter password"
-                      className={`form-control ${
-                        touched.password && errors.password ? "is-invalid" : ""
-                      }`}
-                    />
-                    <ErrorMessage
-                      component="div"
-                      name="password"
-                      className="invalid-feedback"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="btn btn-primary btn-block"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? "Please wait..." : "Submit"}
-                  </button>
-                </Form>
-              )}
-            </Formik>
-          </div>
+              render={props => <Form {...props} />}
+              initialValues={values}
+              validationSchema={validationSchema}
+              onSubmit={this.submit}
+            />
+          </Paper>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }
 
-export default Signin;
+export default withStyles(styles)(InputForm);

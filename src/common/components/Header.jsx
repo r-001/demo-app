@@ -24,6 +24,7 @@ const AdapterLink1 = React.forwardRef((props, ref) => <Link innerRef={ref} {...p
 
 export default function ButtonAppBar() {
   const classes = useStyles();
+  
 
   return (
     <div className={classes.root}>
@@ -32,9 +33,21 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             JPB
           </Typography>
-          <Button component={AdapterLink2} to="/" />
-          <Button component={AdapterLink} to="/login/" />
-          <Button component={AdapterLink1} to="/signup/" />
+          <Button component={AdapterLink2} to="/"  style={{
+            color:"white"
+
+
+          }}   />
+          <Button component={AdapterLink} to="/login/" style={{
+            color:"white"
+            
+
+          }}  />
+          <Button component={AdapterLink1} to="/signup/" style={{
+            color:"white"
+            
+
+          }}  />
         </Toolbar>
       </AppBar>
     </div>

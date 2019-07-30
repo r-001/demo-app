@@ -3,20 +3,18 @@ import { Formik } from "formik";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { Form } from "./Form";
 import Paper from "@material-ui/core/Paper";
+import PasswordValidator from '../common/validator/passwordValidator'
+import EmailValidator from '../common/validator/emailValidator';
 import * as Yup from "yup";
 
 const styles = theme => ({
    
 });
-const EmailTest=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/; 
 
 const validationSchema = Yup.object({
   
-  email: Yup.string().matches(EmailTest,"Please Enter valid Email (ex:xyz123@gmail.com)")
-    .required("Email is required"),
-  password: Yup.string("")
-    .min(8, "Password must contain atleast 8 characters")
-    .required("Enter your password"),
+  email:EmailValidator() ,
+  password: PasswordValidator()
   
 });
 

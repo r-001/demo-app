@@ -9,7 +9,7 @@ import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Link } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+   
   },
   form: {
     width: '100%',
@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export const Form = props => {
+const Form = props => {
 
   const classes = useStyles();
 
@@ -53,7 +53,7 @@ export const Form = props => {
     isValid,
     handleBlur
   } = props;
-  console.table(props);
+  /* console.table(props); */
 
 
   return (
@@ -62,8 +62,8 @@ export const Form = props => {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
+        <Avatar className={classes.avatar} style={{backgroundColor:"blue"}} >
+          <AccountCircle />
         </Avatar>
         <Typography component="h1" variant="h5">
           Signup
@@ -72,7 +72,6 @@ export const Form = props => {
           <TextField
             autoFocus
             variant="outlined"
-            margin="20"
             name="name"
             error={Boolean(touched.name && errors.name)}
             label="Name"
@@ -95,9 +94,7 @@ export const Form = props => {
           
           <TextField
             variant="outlined"
-            margin="20"
             name="email"
-         
             error={Boolean(touched.email && errors.email)}
             label="Email"
             fullWidth
@@ -105,7 +102,6 @@ export const Form = props => {
             value={email}
              onChange={handleChange} 
             onBlur={handleBlur}
-
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -118,9 +114,7 @@ export const Form = props => {
         {/* <div> {(touched.email && errors.email ) }</div> */} <br></br>
           <TextField
             variant="outlined"
-            margin="20"
             name="password"
-           
             error={Boolean( touched.password&&errors.password)}
             label="Password"
             fullWidth
@@ -142,7 +136,6 @@ export const Form = props => {
           {/* <div> {(touched.password && errors.password ) }</div> */} <br></br>
           <TextField
             variant="outlined"
-            margin="20"
             name="confirmPassword"
             error={Boolean(touched.confirmPassword && errors.confirmPassword)}
             label="Confirm Password"
@@ -186,3 +179,5 @@ export const Form = props => {
     </Container>
   );
 };
+
+export default Form;

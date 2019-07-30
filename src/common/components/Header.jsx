@@ -17,12 +17,8 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
 }));
-const AdapterLink2 = React.forwardRef((props, ref) => <Link innerRef={ref} {...props}>Home</Link>)
-const AdapterLink = React.forwardRef((props, ref) => <Link innerRef={ref} {...props}>Signin</Link>)
-const AdapterLink1 = React.forwardRef((props, ref) => <Link innerRef={ref} {...props}>Signup</Link>)
 
-
-export default function ButtonAppBar() {
+export default function Header() {
   const classes = useStyles();
   
 
@@ -33,21 +29,9 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             JPB
           </Typography>
-          <Button component={AdapterLink2} to="/"  style={{
-            color:"white"
-
-
-          }}   />
-          <Button component={AdapterLink} to="/login/" style={{
-            color:"white"
-            
-
-          }}  />
-          <Button component={AdapterLink1} to="/signup/" style={{
-            color:"white"
-            
-
-          }}  />
+          <Button  ><Link to="/"  style={{ color:"white", textDecorationStyle:'none' }}>Home</Link></Button>
+          <Button ><Link to="/login" style={{ color:"white" }}>SignIn</Link></Button>
+          <Button ><Link to="/signup" style={{ color:"white" }}>SignUp</Link></Button>
         </Toolbar>
       </AppBar>
     </div>
